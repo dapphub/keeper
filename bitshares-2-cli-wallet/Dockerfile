@@ -1,5 +1,7 @@
-FROM xeroc/bitshares-2
+FROM bitshares/bitshares-2
 MAINTAINER Fabian Schuh <Fabian@cryptonomex.com>
+
+RUN apt-get install -y screen
 
 ## Copying default configuration
 ADD docker/start.sh /start.sh

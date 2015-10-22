@@ -1,4 +1,4 @@
-screen -dmS bitshares-2 -t cli-wallet \
-     docker run -d -name cli-wallet \
-                --link delayed-node \
-                bitshares-2-cli-wallet
+docker run --name cli-wallet \
+           --link trusted-full-node \
+           -p 127.0.0.1:8092:8092 \
+           bitshares/bitshares-2-cli-wallet bash
