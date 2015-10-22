@@ -1,22 +1,9 @@
-FROM ubuntu:15.04
+FROM nginx
 MAINTAINER Fabian Schuh <Fabian@cryptonomex.com>
 
 ## Core Utilities
-RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt-get install -y nodejs-legacy npm git nginx
-RUN npm install -g coffee-script
-
-RUN git clone http://github.com/bitshares/bitshares-2-ui /build
-WORKDIR /build
-RUN for I in cli dl web; do cd $I; npm install; cd ..; done 
-
-WORKDIR /build/web
-RUN npm run build
-
 RUN mkdir /www
-RUN cp -rv /build/web/dist/* /www/
-
+ADD dist/* /www/
 ADD nginx.conf /etc/nginx/nginx.conf
 
 # Append "daemon off;" to the beginning of the configuration
