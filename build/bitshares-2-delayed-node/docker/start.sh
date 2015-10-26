@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ -n "$TRUSTED_FULL_NODE_PORT_8090_TCP_ADDR" ]; then
+if [ -n "$NODE_PORT_8090_TCP_ADDR" ]; then
  /bitshares-2/programs/delayed_node/delayed_node \
                         --data-dir=/data_delayed_node/ \
-                        --trusted-node="$TRUSTED_FULL_NODE_PORT_8090_TCP_ADDR:$TRUSTED_FULL_NODE_PORT_8090_TCP_PORT" \
+                        --trusted-node="$NODE_PORT_8090_TCP_ADDR:$NODE_PORT_8090_TCP_PORT" \
                         --rpc-endpoint="0.0.0.0:8091" \
                         -s "0.0.0.0:0" \
                         --p2p-endpoint="0.0.0.0:0" \
@@ -14,7 +14,7 @@ else
 ## Configuration Error
 ######################
 This docker has to be linked to a full-node with
-           --link trusted-full-node 
+           --link node 
 Otherwise it will not connect properly!
 EOF
 
