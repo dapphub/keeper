@@ -12,6 +12,6 @@ sys.path.append('/python-graphenelib/scripts/pricefeeds')
 
 import pricefeeds
 
-update_price_feed()
+pricefeeds.update_price_feed()
 while 1:
     pass
