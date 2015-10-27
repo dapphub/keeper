@@ -9,7 +9,7 @@ node:
 price-feeds:
  build: build/bitshares-2-witness-pricefeed
  links:
-  - node
+  - cli-wallet
  volumes:
   - ./conf/pricefeed:/conf/pricefeed
 
@@ -19,6 +19,8 @@ cli-wallet:
   - "127.0.0.1:8092:8092"
  links:
   - node
+ volumes:
+  - ./conf/cli-wallet:/conf/cli-wallet
 
 delayed-node:
  build: build/bitshares-2-delayed-node
@@ -36,8 +38,18 @@ web-wallet:
    - ./conf/web-wallet/www:/www
    - ./conf/web-wallet/conf:/conf
 
-graphene-private-testnet:
- build: build/graphene-private-testnet
+#graphene-private-testnet:
+# build: build/graphene-private-testnet
+# ports:
+#  - 9190:9090
+#  - 8190:8090
+
+ipfs:
+ build: build/go-ipfs
  ports:
-  - 9190:9090
-  - 8190:8090
+  - 4001
+  - 5001
+  - 8080
+ volumes:
+  - ./conf/ipfs/export/:/export/
+  - ./conf/ipfs/data/:/data/ipfs/
