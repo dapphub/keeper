@@ -35,10 +35,21 @@ RUN ./b2 install
 
 ## Fetching BitShares-2
 WORKDIR /
-RUN git clone https://github.com/bitshares/bitshares-2 /bitshares-2
-WORKDIR /bitshares-2
+RUN git clone https://github.com/bitshares/bitshares-2 /bitshares-2-git
+WORKDIR /bitshares-2-git
 RUN git submodule update --init --recursive
 
 ## Building BitShares-2
-RUN CC=gcc-4.9 CXX=g++-4.9 cmake -DBOOST_ROOT="/opt/boost_1_57_0" -DCMAKE_BUILD_TYPE=Release .
+RUN mkdir /build
+WORKDIR /build
+RUN CC=gcc-4.9 CXX=g++-4.9 cmake -DBOOST_ROOT="/opt/boost_1_57_0" -DCMAKE_BUILD_TYPE=Release /bitshares-2-git
 RUN make || make -j 1
+
+RUN mkdir /bitshares-2
+RUN cp -r /build/programs /bitshares-2/
+
+## Cleanup to reduce container size
+RUN rm -rf /boost_1_57_0.tar.bz2 \
+           /boost_1_57_0 \
+           /bitshares-2-git \
+           /build
