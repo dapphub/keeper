@@ -3,6 +3,12 @@ Keeper
 
 Keepers are software agents which contribute to various distributed systems. Each individual keeper is a low-trust contributor. Keeper nodes publish statistics, but these should not be consumed by any blockchain validation logic.
 
+Building bitshares-2 and muse base containers
+---------------------------------------------
+
+    docker -t bitshares/bitshares-2 build/bitshares-2
+    docker -t muse/muse build/muse
+
 Step-By-Step
 ------------
 

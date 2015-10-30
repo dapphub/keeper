@@ -53,3 +53,11 @@ ipfs:
  volumes:
   - ./conf/ipfs/export/:/export/
   - ./conf/ipfs/data/:/data/ipfs/
+
+node:
+ build: build/muse-node
+ ports: 
+  - 8090
+  - 9090
+ volumes:
+  - ./conf/muse-witness:/conf/witness
