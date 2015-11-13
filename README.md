@@ -1,10 +1,23 @@
 Keeper
 ======
 
-Keepers are software agents which contribute to various distributed systems.
-Each individual keeper is a low-trust contributor. Keeper nodes publish
-statistics, but these should not be consumed by any blockchain validation
-logic.
+Keepers are software agents which contribute to various distributed systems (especially blockchain-based ones). Keepers attempt to operate at a profit by following the incentives presented by such systems.
+
+Current
+---
+* Graphene witness node (BTS2 and MUSE)
+* IPFS (default pins)
+* Feed publishing (graphene only)
+
+Wish list
+---------
+ * ethereum full node
+ * tor
+ * arbitrage bot
+ * market-maker
+ * collateral redeemer
+ * nubits liquidity bot
+ * ripple liquidity bot
 
 Building bitshares-2 and muse base containers
 ---------------------------------------------
@@ -69,12 +82,4 @@ IPFS
 
     docker exec $keeper_ipfs ipfs pin ls
 
-Wish list
----------
- * ethereum full node
- * tor
- * arbitrage bot
- * market-maker
- * collateral redeemer
- * nubits liquidity bot
- * ripple liquidity bot
+
