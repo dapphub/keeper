@@ -1,5 +1,5 @@
-Join us on SLACK
-======
+##### Join us on SLACK
+------
 [![Slack Status](http://slack.makerdao.com/badge.svg)](https:/slack.makerdao.com)
 
 
