@@ -1,3 +1,6 @@
 [submodule "build/go-ipfs"]
 	path = build/go-ipfs
 	url = https://github.com/ipfs/go-ipfs
+[submodule "keeperd/dapp/dapple_packages/dappsys"]
+	path = keeperd/dapp/dapple_packages/dappsys
+	url = https://github.com/NexusDevelopment/dappsys
