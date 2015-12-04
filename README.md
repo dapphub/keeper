@@ -6,23 +6,32 @@
 Keeper
 ======
 
-Keepers are software agents which contribute to various distributed systems (especially blockchain-based ones). Keepers attempt to operate at a profit by following the incentives presented by such systems.
+Keepers are software agents which contribute to various decentralized systems.
+Keepers attempt to operate at a profit by following the incentives presented by such systems.
 
-Current
+Keeper is a user-friendly VM and process manager that simplifies running Keepers. 
+Eventually it will be a plug-and-play solution easily adapted to dedicated devices like the Raspberry Pi.
+
+Complete
 ---
 * Graphene witness node (BTS2 and MUSE)
-* IPFS (default pins)
 * Feed publishing (graphene only)
 
 Wish list
 ---------
+* IPFS (default pins)
  * ethereum full node
+ * eth dapps:
+    * piper's alarm
+     * collateral redeemer
  * tor
  * arbitrage bot
  * market-maker
- * collateral redeemer
  * nubits liquidity bot
  * ripple liquidity bot
+
+Individual Images
+===
 
 Building bitshares-2 and muse base containers
 ---------------------------------------------
@@ -66,7 +75,7 @@ CLI-Wallet
  4. This container opens a RPC port 8092 for localhost
  5. It requires unlocking of the wallet file via RPC
 
-Price Feeds
+BTS Price Feeds
 -------------------------
  1. Configuration:
 
