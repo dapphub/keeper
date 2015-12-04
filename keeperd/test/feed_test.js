@@ -6,7 +6,7 @@ var fr = new FeedRouter();
 
 describe("class FeedRouter", function() {
     it("getFeed gets polo data", function(done) {
-        fr.get("polo.btc_eth.latest", function(err, val) {
+        fr.get("polo/btc/eth/latest", function(err, val) {
             if( err ) { throw err; }
             console.log(val);
             expect(val).to.be.a('number');;
