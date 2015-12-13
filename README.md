@@ -44,10 +44,10 @@ Graphene Fullnode/Witness
    * BitShares 2.0: `conf/witness/witness.conf`
    * MUSE: `conf/muse-witness/witness.conf`
      
-     # ID of witness controlled by this node (e.g. "1.6.5", quotes are required, may specify multiple times)
-     witness-id = "1.6.5"
-     # Tuple of [PublicKey, WIF private key] (may specify multiple times)
-     private-key = ["BTS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV","5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"]
+         # ID of witness controlled by this node (e.g. "1.6.5", quotes are required, may specify multiple times)
+         witness-id = "1.6.5"
+         # Tuple of [PublicKey, WIF private key] (may specify multiple times)
+         private-key = ["BTS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV","5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"]
 
  * Run the node/witness:
  
