@@ -2,12 +2,65 @@ Keeper
 ======
 [![Slack Status](http://slack.makerdao.com/badge.svg)](https://slack.makerdao.com)
 
-Keepers are software agents which contribute to various decentralized systems.
-Keepers attempt to operate at a profit by following the incentives presented by such systems.
+Keepers are software agents which follow incentives presented by various systems.
 
-Keeper is a user-friendly VM and process manager that simplifies running Keepers. 
-Eventually it will be a plug-and-play solution easily adapted to dedicated devices like the Raspberry Pi.
+Keeper behavior is specified via **plugins**, which are scripts that can depend on **services**
+managed by Keeper.
 
+An example of a service is `web3`, which lets a plugin communicate with the Ethereum network.
+An example of a plugin is `maker`, which performs incentivized margin calls for the Maker contract system on Ethereum.
+
+Writing a keeper plugin is a good way to ensure that any theoretical incentivized actions which your
+system presents actually get executed, since most Keepers want to run as many profitable plugins as possible.
+
+Writing a plugin
+---
+
+A plugin is a folder in the global `{$KEEPER_ROOT}/plugins` directory which has
+an `init.js` file and an optional `config.json` file. Keeper runs
+each plugin's `init.js` once. For now, each plugin is responsible for its own scheduling
+via `setInterval` or similar.
+
+Here is simple example plugin which logs to the console once the block height has
+exceeded the one specified in the config file.
+
+`init.js`:
+
+    // The first argument is the list of services your plugin depends on.
+    // The second argument is a function which is run once on startup
+    // once all services are initialized.
+    keeper.register(["config", "web3"], function(config, web3) {
+        var interval = setInterval(function() {
+            if( web3.eth.blockNumber > config.minHeight ) {
+                console.log( "Reached minimum blockheight." );
+                interval.cancel(); // TODO how do you actually kill this?
+            }
+        }, 10000);
+    });
+
+`config.json`:
+
+    {
+        "minHeight": 100
+    }
+
+
+Services
+---
+These are services available right now:
+* `config` - Load your plugin's config file.
+* `web3` - communicate with Ethereum (eventually Whisper and Swarm)
+
+There are plans for more:
+
+* `ipfs` - Read and write to ipfs.
+* `ee` - elastic-ethereum, an ElasticSearch-based off-chain indexing solution.
+* `log` - A bunyan child log for your plugin.
+
+
+
+Service Docker Images
+===
 Complete
 ---
 * Graphene witness node (BTS2 and MUSE)
@@ -16,18 +69,20 @@ Complete
 Wish list
 ---------
 * IPFS (default pins)
- * ethereum full node
- * eth dapps:
-    * piper's alarm
-     * collateral redeemer
- * tor
- * arbitrage bot
- * market-maker
- * nubits liquidity bot
- * ripple liquidity bot
+* ethereum full node
+* eth dapps:
+   * piper's alarm
+    * collateral redeemer
+* tor
+* arbitrage bot
+* market-maker
+* nubits liquidity bot
+* ripple liquidity bot
 
 Individual Images
 ===
+
+Below are instructions for working with the docker images before they are properly service-ivized.
 
 Building bitshares-2 and muse base containers
 ---------------------------------------------
