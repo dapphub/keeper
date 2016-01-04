@@ -2,6 +2,8 @@ Keeper
 ======
 [![Slack Status](http://slack.makerdao.com/badge.svg)](https://slack.makerdao.com)
 
+(This document is written in present tense, but it is a design document and the code doesn't exist yet.)
+
 Keepers are software agents which follow incentives presented by various systems.
 
 Keeper behavior is specified via **plugins**, which are scripts that can depend on **services**
