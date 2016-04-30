@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+test -e ~/.keeperrc && . $_
+exec keeper-"${1-help}" "${@:2}"

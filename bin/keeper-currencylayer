@@ -1,0 +1,4 @@
+#!/bin/sh -e
+key=$CURRENCYLAYER_ACCESS_KEY
+curl -s "http://www.apilayer.net/api/live?access_key=$key" |
+jshon -e quotes -e $1

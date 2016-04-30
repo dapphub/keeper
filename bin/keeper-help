@@ -1,0 +1,7 @@
+#!/bin/sh
+echo Usage: keeper COMMAND ARGS...
+echo Commands:
+for command in `dirname $0`/keeper-*; do
+  command=${command##*keeper-}
+  case $command in -*);; *) echo "  $command"; esac
+done

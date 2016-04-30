@@ -1,0 +1,9 @@
+redis:
+  image: redis
+worker:
+  build: .
+  command: keeper worker
+  environment:
+    - REDIS_HOST=redis
+  links:
+    - redis

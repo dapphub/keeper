@@ -1,0 +1,2 @@
+#!/bin/sh
+exec redis-cli -h ${REDIS_HOST-localhost} "$@"
