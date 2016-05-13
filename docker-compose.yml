@@ -4,11 +4,11 @@ services:
   worker: &service
     command: keeper worker
     build: .
+    environment: [REDIS_HOST=redis]
+    links: [redis]
     volumes:
       - ./bin:/usr/local/bin:ro
       - ${HOME}/.keeperrc:/root/.keeperrc:ro
-    environment: [REDIS_HOST=redis]
-    links: [redis]
   clock:
     <<: *service
     command: keeper clock

@@ -1,4 +1,4 @@
 #!/bin/sh -e
-curl -s http://www.apilayer.net/api/live\
-?access_key=${CURRENCYLAYER_ACCESS_KEY?} |
+(set -x; curl -s http://www.apilayer.net/api/live\
+?access_key=${CURRENCYLAYER_ACCESS_KEY?}) |
 jshon -Q -e quotes -e $1

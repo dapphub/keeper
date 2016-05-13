@@ -1,3 +1,4 @@
 #!/bin/sh -ex
 while task=`keeper assume-task`
-do keeper perform-task $task & done
+do keeper perform-task $task &
+done
