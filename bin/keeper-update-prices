@@ -1,2 +1,5 @@
 #!/bin/sh
-keeper fetch-prices | xargs -n2 keeper update-price
+keeper fetch-prices |
+while read symbol price
+do keeper update-price $symbol ${price:?}
+done

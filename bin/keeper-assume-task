@@ -1,2 +1,2 @@
-#!/bin/sh -x
+#!/bin/sh
 exec keeper redis BRPOPLPUSH keeper:tasks keeper:wip 0

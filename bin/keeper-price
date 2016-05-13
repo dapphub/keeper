@@ -1,2 +1,2 @@
 #!/bin/sh
-exec redis-cli --raw get keeper:prices:$1
+exec keeper redis get keeper:prices:$1

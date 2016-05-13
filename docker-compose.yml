@@ -1,9 +1,14 @@
-redis:
-  image: redis
-worker:
-  build: .
-  command: keeper worker
-  environment:
-    - REDIS_HOST=redis
-  links:
-    - redis
+version: "2"
+services:
+  redis: { image: redis }
+  worker: &service
+    command: keeper worker
+    build: .
+    volumes:
+      - ./bin:/usr/local/bin:ro
+      - ${HOME}/.keeperrc:/root/.keeperrc:ro
+    environment: [REDIS_HOST=redis]
+    links: [redis]
+  clock:
+    <<: *service
+    command: keeper clock

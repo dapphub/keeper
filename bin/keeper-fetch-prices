@@ -1,4 +1,4 @@
 #!/bin/sh
-echo BTCETH `keeper poloniex BTC_ETH || echo 0`
-echo USDBTC `keeper currencylayer USDBTC || echo 0`
-echo USDXDR `keeper currencylayer USDXDR || echo 0`
+echo BTCETH `keeper fetch-price poloniex BTC_ETH` &
+echo USDBTC `keeper fetch-price currencylayer USDBTC` &
+echo USDXDR `keeper fetch-price currencylayer USDXDR` &

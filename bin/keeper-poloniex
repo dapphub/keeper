@@ -1,3 +1,0 @@
-#!/bin/sh -e
-curl -s "https://poloniex.com/public?command=returnTicker" |
-jshon -e $1 -e last -u

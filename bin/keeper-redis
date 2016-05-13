@@ -1,2 +1,3 @@
 #!/bin/sh
-exec redis-cli -h ${REDIS_HOST-localhost} "$@"
+echo >&2 redis $*
+exec redis-cli --raw -h ${REDIS_HOST-localhost} "$@"
