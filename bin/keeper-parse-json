@@ -1,0 +1,2 @@
+#!/bin/sh
+json=`cat`; echo "$json" | jshon -Q "$@" || keeper fail "$json"

@@ -1,3 +1,0 @@
-#!/bin/sh
-(set -x; keeper tick; sleep ${TICK-10})
-echo; exec keeper clock

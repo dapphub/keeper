@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+(set -x; "${@:2}"; sleep $1)
+exec $0 "$@"

@@ -54,7 +54,7 @@ ipfs:
   - ./conf/ipfs/export/:/export/
   - ./conf/ipfs/data/:/data/ipfs/
 
-node:
+muse-node:
  build: build/muse-node
  ports: 
   - 8090

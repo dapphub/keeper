@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+var Web3 = require("web3")
+var sleep = require("sleep").sleep
+
+var PORT = process.env.ETH_RPC_PORT || 8545
+var HOST = process.env.ETH_RPC_HOST || "localhost"
+var URL = process.env.ETH_RPC_URL || `http://${HOST}:${PORT}`
+
+var web3 = new Web3(new Web3.providers.HttpProvider(URL))
+console.log(`Waiting for ${URL} to come online...`)
+wait_for_connection()
+console.log(`Connected to ${URL}.`)
+
+function wait_for_connection() {
+  var block
+  while (!block) {
+    try {
+      sleep(1)
+      block = web3.eth.getBlock(0)
+    } catch (error) {
+      console.error(`${new Date()} - ${error.message}`)
+    }
+  }
+}
+
+web3.eth.filter("latest", (error, log) => {
+  console.log(log)
+})

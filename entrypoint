@@ -1,0 +1,7 @@
+#!/bin/sh -ex
+uid=`stat -c %u $0`
+gid=`stat -c %g $0`
+groupmod -o -g $gid ${GROUP?} ||
+groupadd -o -g $gid ${GROUP?}
+useradd 2>/dev/null -o -u $uid -g $gid -d ${HOME?} ${USER?} || true
+exec su - $USER -- -c "$*"

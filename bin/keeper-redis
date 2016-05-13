@@ -1,3 +1,5 @@
 #!/bin/sh
 echo >&2 redis $*
-exec redis-cli --raw -h ${REDIS_HOST-localhost} "$@"
+exec redis-cli --raw \
+-h ${REDIS_HOST-localhost} \
+-p ${REDIS_PORT-6379} "$@"

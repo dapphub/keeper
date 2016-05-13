@@ -1,0 +1,2 @@
+#!/bin/sh
+exec keeper redis get keeper:prices:$1

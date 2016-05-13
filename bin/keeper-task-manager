@@ -1,0 +1,4 @@
+#!/bin/sh
+while task=`(set -x; keeper task assume)`
+do (set -x; keeper task perform $task) &
+done

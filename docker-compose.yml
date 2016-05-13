@@ -1,14 +1,54 @@
 version: "2"
 services:
-  redis: { image: redis }
-  worker: &service
-    command: keeper worker
+
+  #-----------------------------------------------------------------
+  # Infrastructure services
+  #-----------------------------------------------------------------
+
+  # Persistent Redis database stored in ~/.keeper
+  redis:
+    command: >
+      redis-server
+        --appendonly yes
+        --loglevel warning
+        --tcp-backlog 128
+        --port ${REDIS_PORT}
+    entrypoint: /entrypoint
+    environment: [USER, GROUP, HOME]
+    image: redis
+    network_mode: host
+    volumes:
+      - ./entrypoint:/entrypoint:ro
+      - ${HOME}/.keeper:/data:rw
+
+  # Ethereum node using data from ~/.ethereum
+  geth:
+    command: geth --rpc ${GETH_FLAGS}
+    entrypoint: /entrypoint
+    environment: [USER, GROUP, HOME]
+    image: ethereum/client-go
+    network_mode: host
+    volumes:
+      - ./entrypoint:/entrypoint:ro
+      - ${HOME}/.ethereum:/root/.ethereum:rw
+
+  #-----------------------------------------------------------------
+  # Keeper services
+  #-----------------------------------------------------------------
+
+  task-manager: &service
     build: .
-    environment: [REDIS_HOST=redis]
-    links: [redis]
+    command: keeper task-manager
+    network_mode: host
     volumes:
       - ./bin:/usr/local/bin:ro
+      - ./node_modules:/node_modules:ro
       - ${HOME}/.keeperrc:/root/.keeperrc:ro
+
   clock:
     <<: *service
-    command: keeper clock
+    command: keeper every-n-seconds 10 keeper tick
+
+  eth-watcher:
+    <<: *service
+    command: keeper eth-watcher
