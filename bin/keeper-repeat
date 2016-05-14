@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+bash -c "$*"
+exec $0 "$*"

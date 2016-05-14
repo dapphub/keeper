@@ -47,7 +47,7 @@ services:
 
   clock:
     <<: *service
-    command: keeper clock
+    command: keeper clock 10 keeper update
 
   eth-watcher:
     <<: *service

@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh -e
 uid=`stat -c %u $0`
 gid=`stat -c %g $0`
 groupmod -o -g $gid ${GROUP?} ||

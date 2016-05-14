@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 ## keeper-clock -- run a tick command at a regular interval
 ## Usage: keeper clock <seconds> <tick-command> [<tick-args>]
-exec keeper every-n-seconds ${1?} bash -c "echo; date; ${*:2}"
+exec keeper repeat "date; set -x; ${2?} ${*:3}; sleep ${1?}"
