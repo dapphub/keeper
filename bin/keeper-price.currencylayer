@@ -1,3 +1,3 @@
 #!/bin/sh -e
 url=http://www.apilayer.net/api/live?access_key=${CURRENCYLAYER_ACCESS_KEY?}
-(set -x; curl -s $url) | keeper parse-json -e quotes -e $1
+(set -x; keeper curl $url) | keeper parse-json -e quotes -e $1

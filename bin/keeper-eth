@@ -1,0 +1,4 @@
+#!/bin/sh
+## keeper-eth -- tools related to the Ethereum blockchain
+## Usage: keeper eth watch
+exec "$0-$@"

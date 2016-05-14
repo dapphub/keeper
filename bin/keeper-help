@@ -1,7 +1,5 @@
-#!/bin/sh
-echo Usage: keeper COMMAND ARGS...
-echo Commands:
-for command in `dirname $0`/keeper-*; do
-  command=${command##*keeper-}
-  case $command in -*);; *) echo "  $command"; esac
-done
+#!/usr/bin/env bash
+if [[ $1 ]]
+then keeper help-about "$1"
+else keeper --help
+fi

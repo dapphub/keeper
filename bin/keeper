@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 test -e ~/.keeperrc && . $_
+PATH+=:`dirname $0`
 exec keeper-"${1-help}" "${@:2}"

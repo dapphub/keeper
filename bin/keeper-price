@@ -1,2 +1,7 @@
 #!/bin/sh
+## keeper-price -- read and write prices and update price feeds
+## Usage: keeper price (update-all | fetch-all)
+##    or: keeper price fetch <provider> <symbol>
+##    or: keeper price set <symbol> (<value> | NaN)
+##    or: keeper price get <symbol>
 exec "$0-$@"

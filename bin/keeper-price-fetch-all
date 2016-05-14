@@ -4,3 +4,4 @@ fetch() { echo $1 `(set -x; keeper price fetch $2 ${3-$1})` & sleep 0.1; }
 fetch BTCETH poloniex BTC_ETH
 fetch USDBTC currencylayer
 fetch USDXDR currencylayer
+wait

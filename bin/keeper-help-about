@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+grep -oP '^.{0,3}## \K.*' `dirname $0`/keeper-$1 | sed 1d

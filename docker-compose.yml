@@ -36,9 +36,9 @@ services:
   # Keeper services
   #-----------------------------------------------------------------
 
-  task-manager: &service
+  task-loop: &service
     build: .
-    command: keeper task-manager
+    command: keeper task loop
     network_mode: host
     volumes:
       - ./bin:/usr/local/bin:ro
@@ -47,8 +47,8 @@ services:
 
   clock:
     <<: *service
-    command: keeper every-n-seconds 10 keeper tick
+    command: keeper clock
 
   eth-watcher:
     <<: *service
-    command: keeper eth-watcher
+    command: keeper eth watch

@@ -1,2 +1,7 @@
-#!/bin/sh
-exec "$0-$@"
+#!/usr/bin/env bash
+## keeper-task -- schedule tasks to be retried until successful
+## Usage: keeper task loop
+##    or: keeper task schedule <command> [<args>]
+##    or: keeper task await
+##    or: keeper task (attempt | finish) <command> [<args>]
+exec "$0-${1---help}" "${@:2}"

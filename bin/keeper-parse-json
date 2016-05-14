@@ -1,2 +1,7 @@
-#!/bin/sh
-json=`cat`; echo "$json" | jshon -Q "$@" || keeper fail "$json"
+#!/usr/bin/env bash
+json=`cat`
+if ! [[ $json ]]
+then keeper fail "invalid json (empty string)"
+elif ! jshon <<<$json -Q "$@"
+then keeper fail "unexpected json: $json"
+fi
