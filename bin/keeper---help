@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cat <<EOF
 Usage: keeper <command> [<args>]
-Keeper is an admin toolkit for blockchain-based, profit-seeking agents.
+Keeper is an admin toolkit for blockchain-oriented profit-seeking agents.
 
 Commands:
 

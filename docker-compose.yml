@@ -10,27 +10,31 @@ services:
     command: >
       redis-server
         --appendonly yes
+        --dir ${REDIS_DATADIR}
         --loglevel warning
         --tcp-backlog 128
-        --port ${REDIS_PORT}
     entrypoint: /entrypoint
     environment: [USER, GROUP, HOME]
     image: redis
-    network_mode: host
     volumes:
       - ./entrypoint:/entrypoint:ro
-      - ${HOME}/.keeper:/data:rw
+      - ${REDIS_DATADIR}:${REDIS_DATADIR}:rw
 
   # Ethereum node using data from ~/.ethereum
   geth:
-    command: geth --rpc ${GETH_FLAGS}
+    command: >
+      ${GETH}
+        --datadir=${GETH_DATADIR}
+        --rpc ${GETH_FLAGS}
+        --rpcaddr 0.0.0.0
     entrypoint: /entrypoint
     environment: [USER, GROUP, HOME]
     image: ethereum/client-go
-    network_mode: host
+    ports:
+      - ${GETH_INTERFACE}:${GETH_PORT}:8545
     volumes:
       - ./entrypoint:/entrypoint:ro
-      - ${HOME}/.ethereum:/root/.ethereum:rw
+      - ${GETH_DATADIR}:${GETH_DATADIR}:rw
 
   #-----------------------------------------------------------------
   # Keeper services
@@ -39,15 +43,38 @@ services:
   task-loop: &service
     build: .
     command: keeper task loop
-    network_mode: host
+    environment:
+      - ETH_RPC_HOST=eth-proxy
+      - KEEPERRC
+      - KEEPER_CONFIG
+      - REDIS_HOST=redis
+    links:
+      - eth-proxy
+      - redis
     volumes:
       - ./bin:/usr/local/bin:ro
       - ./node_modules:/node_modules:ro
-      - ${HOME}/.keeperrc:/root/.keeperrc:ro
+      - ${KEEPERRC}:${KEEPERRC}:ro
+      - ${KEEPER_CONFIG}:${KEEPER_CONFIG}:ro
+
+  eth-proxy:
+    <<: *service
+    command: keeper eth proxy
+    environment:
+      - ETH_ALLOWED_ACCOUNTS
+      - ETH_RPC_HOST
+      - ETH_RPC_PORT
+      - KEEPERRC
+      - KEEPER_CONFIG
+    expose: [8545]
+    extra_hosts:
+      - dockerhost:${DOCKERHOST}
+    links:
+      - geth
 
   clock:
     <<: *service
-    command: keeper clock 10 keeper update
+    command: keeper clock ${TICK} keeper update
 
   eth-watcher:
     <<: *service

@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+// keeper-eth-proxy -- restrict an Ethereum node to specific accounts
+var RPC_HOST = process.env.ETH_RPC_HOST || "localhost"
+var RPC_PORT = process.env.ETH_RPC_PORT || 8545
+
+if (process.env.ETH_ALLOWED_ACCOUNTS) {
+  ALLOWED_ACCOUNTS = process.env.ETH_ALLOWED_ACCOUNTS.split(/\s+/)
+} else {
+  console.warn("keeper: warning: $ETH_ALLOWED_ACCOUNTS is empty")
+  ALLOWED_ACCOUNTS = [] // String.prototype.split is stupid
+}
+
+for (var account of ALLOWED_ACCOUNTS) {
+  if (!/^0x/.test(account)) {
+    console.error(`keeper: error: account must start with 0x: ${account}`)
+    process.exit(1)
+  }
+}
+
+function sanitize(account) {
+  return ALLOWED_ACCOUNTS.indexOf(account) == -1 ? "not allowed" : account
+}
+
+require("http").createServer((frontend_req, frontend_res) => {
+  slurp(frontend_req, (error, json) => {
+    // console.log(`Request: ${json}`)
+    var message = JSON.parse(json)
+    switch (message.method) {
+    case "eth_accounts":
+      reply({ result: ALLOWED_ACCOUNTS })
+      break
+    case "eth_getBalance":
+    case "eth_sign":
+      message.params[0] = sanitize(message.params[0])
+      proxy()
+      break
+    case "eth_call": // XXX: Is this neccessary?
+    case "eth_sendTransaction":
+      message.params[0].from = sanitize(message.params[0].from)
+      proxy()
+      break
+    default:
+      proxy()
+    }
+
+    function reply(response) {
+      frontend_res.end(JSON.stringify(Object.assign({
+        jsonrpc: "2.0", id: message.id
+      }, response)))
+    }
+
+    function proxy() {
+      // console.log(`Proxying to ${RPC_HOST}:${RPC_PORT}...`)
+      require("http").request({
+        host: RPC_HOST, port: RPC_PORT, method: "POST",
+        headers: { "Content-Type": "application/json" },
+      }, backend_res => {
+        slurp(backend_res, (error, json) => {
+          // console.log(`Response: ${json}`)
+          frontend_res.end(json)
+        })
+      }).on("error", error => {
+        reply({ error: { message: error.message } })
+      }).end(JSON.stringify(message))
+    }
+  })
+}).listen(8545)
+
+function slurp(stream, callback) {
+  var data = []
+  stream.on("data", chunk => data.push(chunk))
+  stream.on("error", error => callback(error))
+  stream.on("end", () => callback(null, Buffer.concat(data)))
+}

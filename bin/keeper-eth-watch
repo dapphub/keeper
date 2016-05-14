@@ -2,25 +2,29 @@
 var Web3 = require("web3")
 var sleep = require("sleep").sleep
 
-var PORT = process.env.ETH_RPC_PORT || 8545
-var HOST = process.env.ETH_RPC_HOST || "localhost"
-var URL = process.env.ETH_RPC_URL || `http://${HOST}:${PORT}`
+var RPC_HOST = process.env.ETH_RPC_HOST || "localhost"
+var RPC_PORT = process.env.ETH_RPC_PORT || 8545
+var RPC_URL = `http://${RPC_HOST}:${RPC_PORT}`
 
-var web3 = new Web3(new Web3.providers.HttpProvider(URL))
-console.log(`Waiting for ${URL} to come online...`)
-wait_for_connection()
-console.log(`Connected to ${URL}.`)
+var web3 = new Web3(new Web3.providers.HttpProvider(RPC_URL))
 
-function wait_for_connection() {
-  var block
-  while (!block) {
-    try {
-      sleep(1)
-      block = web3.eth.getBlock(0)
-    } catch (error) {
-      console.error(`${new Date()} - ${error.message}`)
-    }
+sleep(3)
+var genesis
+while (!genesis) {
+  try {
+    genesis = web3.eth.getBlock(0)
+  } catch (error) {
+    console.error(`keeper: error: could not connect to ${RPC_URL}`)
+    console.error(`keeper: error: ${error.message}`)
+    sleep(1)
   }
+}
+
+console.log(`Connected to Ethereum RPC endpoint at ${RPC_URL}.`)
+console.log(`Available accounts: ${JSON.stringify(web3.eth.accounts)}`)
+
+for (var account of web3.eth.accounts) {
+  console.log(`Balance (${account}): ${web3.eth.getBalance(account)}`)
 }
 
 web3.eth.filter("latest", (error, log) => {

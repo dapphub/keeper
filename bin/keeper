@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-test -e ~/.keeperrc && . $_
-PATH+=:`dirname $0`
+test -e ${KEEPERRC-~/.keeperrc} && . $_
+test -e "${KEEPER_CONFIG}" && . $_
+which keeper >/dev/null 2>&1 || PATH+=:`dirname $0`
 exec keeper-"${1-help}" "${@:2}"
