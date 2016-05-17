@@ -1,2 +1,0 @@
-#!/bin/sh
-exec keeper redis set keeper:prices:$1 ${2?missing price}

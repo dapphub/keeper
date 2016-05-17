@@ -1,5 +1,0 @@
-#!/bin/sh
-keeper price fetch-all |
-while read symbol price
-do keeper price set $symbol $price
-done

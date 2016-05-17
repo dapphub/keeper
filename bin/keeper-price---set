@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+while [[ $1 ]]; do
+  keeper redis set keeper:prices:$1 ${2?}
+  shift 2
+done

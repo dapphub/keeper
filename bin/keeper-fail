@@ -1,2 +1,0 @@
-#!/bin/sh
-keeper error $*; exit 1

@@ -1,0 +1,2 @@
+#!/bin/sh -e
+keeper redis LREM keeper:wip 1 "$*"

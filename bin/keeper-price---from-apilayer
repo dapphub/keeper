@@ -1,0 +1,4 @@
+#!/bin/sh -e
+key=${APILAYER_ACCESS_KEY?}
+keeper curl http://www.apilayer.net/api/live?access_key=$key |
+keeper --parse-json -e quotes -e $1 || echo NaN

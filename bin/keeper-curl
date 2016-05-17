@@ -1,2 +1,3 @@
-#!/bin/sh
-exec curl -s --show-error "$@"
+#!/usr/bin/env bash
+set -e; [[ $DEBUG || $DEBUG_CURL ]] && set -x
+curl --silent --show-error "$@"

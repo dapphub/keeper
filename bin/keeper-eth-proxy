@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// keeper-eth-proxy -- restrict an Ethereum node to specific accounts
+/// keeper-eth-proxy -- restrict an Ethereum node to specific accounts
 var RPC_HOST = process.env.ETH_RPC_HOST || "localhost"
 var RPC_PORT = process.env.ETH_RPC_PORT || 8545
 

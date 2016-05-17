@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-## keeper-redis -- invoke redis-cli(1) with proper host and port
-## Usage: keeper redis <command> [<args>]
-## Respects the environment variables $REDIS_HOST and $REDIS_PORT.
-echo >&2 redis $*
-exec redis-cli --raw \
+### keeper-redis -- invoke redis-cli(1) with proper host and port
+### Usage: keeper redis <command> [<args>]
+### Respects the environment variables $REDIS_HOST and $REDIS_PORT.
+set -e; [[ $DEBUG || $DEBUG_REDIS ]] && set -x
+
+redis-cli --raw \
 ${REDIS_HOST+-h $REDIS_HOST} \
-${REDIS_PORT+-p $REDIS_PORT} \
-"$@"
+${REDIS_PORT+-p $REDIS_PORT} "$@"

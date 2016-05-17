@@ -1,2 +1,0 @@
-#!/bin/sh
-exec keeper try-with-default NaN price.$*

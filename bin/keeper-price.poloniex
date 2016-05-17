@@ -1,3 +1,0 @@
-#!/bin/sh -e
-url=https://poloniex.com/public?command=returnTicker
-(set -x; keeper curl $url) | keeper parse-json -e $1 -e last -u

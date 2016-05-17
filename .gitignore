@@ -1,4 +1,0 @@
-*.swp
-__pycache__
-#conf/ipfs/data/*
-#conf/ipfs/export/*

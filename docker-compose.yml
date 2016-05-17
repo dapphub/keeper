@@ -42,7 +42,7 @@ services:
 
   task-loop: &service
     build: .
-    command: keeper task loop
+    command: keeper task --loop
     environment:
       - ETH_RPC_HOST=eth-proxy
       - KEEPERRC
@@ -59,7 +59,7 @@ services:
 
   eth-proxy:
     <<: *service
-    command: keeper eth proxy
+    command: keeper eth-proxy
     environment:
       - ETH_ALLOWED_ACCOUNTS
       - ETH_RPC_HOST

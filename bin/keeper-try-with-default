@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-keeper "${@:2}" || { echo $1; keeper fail failed: "${@:2}"; }

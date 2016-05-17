@@ -1,0 +1,4 @@
+#!/bin/sh -e
+while task=`keeper task --await`; do
+  keeper task --attempt $task &
+done

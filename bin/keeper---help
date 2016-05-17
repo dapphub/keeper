@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-cat <<EOF
+cat <<.
 Usage: keeper <command> [<args>]
-Keeper is an admin toolkit for blockchain-oriented profit-seeking agents.
+Keeper is an admin toolkit for incentive-following software agents.
 
 Commands:
 
-$(grep -ho '^.. keeper-[^ ]* -- .*' `dirname $0`/keeper-* |
-sed -E 's/^.. keeper-([^ ]*) -- (.*)/\1 \2/' |
-while read command help
-do printf '   %-12s  %s\n' "$command" "$help"
+$(grep -hoP "^(\\S)\\1\\1 keeper-\\K[^ ]* -- .*" \
+$(dirname $0)/keeper-* | sed "s/ -- / /" |
+while read name description
+do printf "   %-12s  %s\n" "$name" "$description"
 done)
 
 Report bugs to <https://github.com/nexusdev/keeper>.
-EOF
+.

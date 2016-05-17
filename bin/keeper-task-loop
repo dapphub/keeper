@@ -1,4 +1,0 @@
-#!/bin/sh
-while task=`(set -x; keeper task await)`
-do (set -x; keeper task attempt $task) &
-done
