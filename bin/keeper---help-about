@@ -1,2 +1,0 @@
-#!/bin/sh -e
-grep -oP "^(\\S)\\1\\1 \\K.*" $(dirname $0)/keeper-$1 | sed 1d

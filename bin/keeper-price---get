@@ -1,4 +1,0 @@
-#!/bin/sh
-for symbol in ${*-$(keeper price --symbols)}; do
-  echo $symbol $(keeper redis get keeper:prices:$symbol)
-done

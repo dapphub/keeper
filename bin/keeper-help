@@ -1,6 +1,0 @@
-#!/bin/sh -e
-if [ $# = 1 ]; then
-  keeper --help-about "$1"
-else
-  keeper --help
-fi

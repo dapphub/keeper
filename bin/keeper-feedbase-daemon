@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -eu
+prefix() { sed -u "s/^/$1/"; }
+
+for id in `keeper config feedbase feeds | jshon -k`; do
+  echo "Starting update loop for feed #$id..."
+  keeper feedbase-update-loop $id |& prefix "[#$id] " &
+  sleep 2
+done
+
+wait

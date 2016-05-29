@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-## keeper---try -- execute a command or print a default value
-## Usage: keeper --try --default=<value> <command> [<args>]
-[[ $1 == --default=* && $2 ]] || { keeper help try; exit 1; }
-"${@:2}" || { echo ${1#*=}; keeper fail failed: "${@:2}"; }

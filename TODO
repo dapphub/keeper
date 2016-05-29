@@ -1,4 +1,8 @@
-- update feedbase automatically
+Feedbase:
+- detect when feed is read and update early
+- automatically use owner account for each feed
+
+Other stuff:
 - integrate alarm clock
 - integrate the stuff in services/
 - ipfs default pins

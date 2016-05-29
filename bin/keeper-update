@@ -1,3 +1,0 @@
-#!/bin/sh -x
-### keeper-update -- update information from all remote sources
-keeper price --update

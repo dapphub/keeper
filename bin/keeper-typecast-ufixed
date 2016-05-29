@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -eu
+fail() { echo >&2 $*; exit 1; }
+
+[[ $# = 3 ]] || fail "Usage: ${0##*/} <a> <b> <number>"
+a=$1 b=$2 number=$3
+
+hex_char_count=$(((a + b) / 4))
+(( a % 4 == 0 && b % 4 == 0)) ||
+fail "${0##*/}: error: size must be divisible by 4: $a + $b"
+
+echo "obase = 16; scale = 0; ($number * 2 ^ $b) / 1" | bc |
+printf "0x%${hex_char_count}s\n" "`cat`" | tr ' ' 0

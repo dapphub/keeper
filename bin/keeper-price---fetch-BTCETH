@@ -1,2 +1,0 @@
-#!/bin/sh -e
-keeper price --from-poloniex BTC_ETH

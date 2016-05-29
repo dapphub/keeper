@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eu
+id=$1
+get() { keeper config feedbase feeds $id $1; }
+
+command=`get command`
+type=`get type`
+expiration=`get expiration`
+
+raw_value=`set -x; bash -eu -c "$command"`
+value=`set -x; keeper typecast "$type" "$raw_value"`
+
+echo >&2 Setting expiration to $expiration seconds from now.
+expiration=$((`date +%s` + expiration))
+
+set -x
+feedbase publish $id "$value" $expiration

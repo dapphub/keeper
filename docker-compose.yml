@@ -1,81 +1,16 @@
 version: "2"
 services:
 
-  #-----------------------------------------------------------------
-  # Infrastructure services
-  #-----------------------------------------------------------------
-
-  # Persistent Redis database stored in ~/.keeper
-  redis:
-    command: >
-      redis-server
-        --appendonly yes
-        --dir ${REDIS_DATADIR}
-        --loglevel warning
-        --tcp-backlog 128
-    entrypoint: /entrypoint
-    environment: [USER, GROUP, HOME]
-    image: redis
-    volumes:
-      - ./entrypoint:/entrypoint:ro
-      - ${REDIS_DATADIR}:${REDIS_DATADIR}:rw
-
-  # Ethereum node using data from ~/.ethereum
-  geth:
-    command: >
-      ${GETH}
-        --datadir=${GETH_DATADIR}
-        --rpc ${GETH_FLAGS}
-        --rpcaddr 0.0.0.0
-    entrypoint: /entrypoint
-    environment: [USER, GROUP, HOME]
-    image: ethereum/client-go
-    ports:
-      - ${GETH_INTERFACE}:${GETH_PORT}:8545
-    volumes:
-      - ./entrypoint:/entrypoint:ro
-      - ${GETH_DATADIR}:${GETH_DATADIR}:rw
-
-  #-----------------------------------------------------------------
-  # Keeper services
-  #-----------------------------------------------------------------
-
-  task-loop: &service
+  feedbase:
     build: .
-    command: keeper task --loop
+    command: keeper feedbase-daemon
     environment:
-      - ETH_RPC_HOST=eth-proxy
-      - KEEPERRC
-      - KEEPER_CONFIG
-      - REDIS_HOST=redis
-    links:
-      - eth-proxy
-      - redis
-    volumes:
-      - ./bin:/usr/local/bin:ro
-      - ./node_modules:/node_modules:ro
-      - ${KEEPERRC}:${KEEPERRC}:ro
-      - ${KEEPER_CONFIG}:${KEEPER_CONFIG}:ro
-
-  eth-proxy:
-    <<: *service
-    command: keeper eth-proxy
-    environment:
-      - ETH_ALLOWED_ACCOUNTS
+      - ETH_ACCOUNT
+      - ETH_RPC_URL
       - ETH_RPC_HOST
       - ETH_RPC_PORT
-      - KEEPERRC
-      - KEEPER_CONFIG
-    expose: [8545]
-    extra_hosts:
-      - dockerhost:${DOCKERHOST}
-    links:
-      - geth
-
-  clock:
-    <<: *service
-    command: keeper clock ${TICK} keeper update
-
-  eth-watcher:
-    <<: *service
-    command: keeper eth watch
+      - HOME
+    network_mode: host
+    volumes:
+      - ./bin:/usr/local/bin:ro
+      - ${HOME}/.keeper.json:${HOME}/.keeper.json:ro

@@ -1,3 +1,0 @@
-#!/bin/sh
-echo >&2 keeper: error: $*
-exit 1

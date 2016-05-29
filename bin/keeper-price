@@ -1,12 +1,2 @@
-#!/usr/bin/env bash
-### keeper-price -- read and update price feeds
-### Usage: keeper price [--get] [<symbols>]
-###    or: keeper price --set <symbol> (<value> | NaN)
-###    or: keeper price --update [<symbols>]
-set -e
-
-if [[ $1 = -* ]]; then
-  keeper price-"$@"
-else
-  keeper price --get "$@"
-fi
+#!/bin/sh
+exec "$0-$@"

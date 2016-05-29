@@ -1,3 +1,0 @@
-#!/bin/sh
-bash -c "$*" || { sleep 1; keeper task --schedule "$*"; }
-keeper task --finish "$*"

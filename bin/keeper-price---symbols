@@ -1,2 +1,0 @@
-#!/bin/sh -e
-ls $(dirname $0)/keeper-price---fetch-* | sed "s/.*-//"

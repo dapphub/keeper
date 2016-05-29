@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eu
+fail() { echo >&2 ${0##*/}: $*; exit 1; }
+
+conf=~/.keeper.json path=`printf " -e %q" "$@"`
+json-get() { eval jshon -Q <$conf $path $*; }
+
+json-get -u || json-get ||
+fail "error: not found: \``printf .%s "$@"`' (in \`$conf')"

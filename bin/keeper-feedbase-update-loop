@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -eu
+interval=`keeper config feedbase feeds $1 interval`
+
+echo ---------- `date` ----------
+(set -x; keeper feedbase-update $1) || echo WARNING: update failed
+(set -x; sleep $interval)
+
+exec $0 "$@"

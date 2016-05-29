@@ -1,4 +1,0 @@
-#!/bin/sh -e
-for symbol in ${*-$(keeper price --symbols)}; do
-  keeper price --set $symbol $(keeper price --fetch-$symbol)
-done

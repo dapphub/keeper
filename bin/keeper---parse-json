@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -e
-json=`cat`
-if ! [[ $json ]]; then
-  keeper --fail "invalid json (empty string)"
-elif ! jshon <<<$json -Q "$@"; then
-  keeper --fail "unexpected json: $json"
-fi

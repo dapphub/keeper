@@ -1,2 +1,0 @@
-#!/bin/sh -e
-keeper redis LPUSH keeper:tasks "$*"
