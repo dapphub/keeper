@@ -64,9 +64,10 @@ By default, the Ethereum node at `http://localhost:8545` is used.
 To change this, please set the variable `ETH_RPC_URL`.  Currently,
 only one Ethereum account (specified by the `ETH_ACCOUNT` variable)
 can be used.  This account must be the owner of all the price feeds.
+Of course, you need to your feed IDs before you can publish to them.
+See <https://github.com/nexusdev/feedbase> for more details.
 
 Each value will be automatically converted into fixed-point notation
 according to the value of the `type` option for the feed in question.
-
-Of course, you need to your feed IDs before you can publish to them.
-See <https://github.com/nexusdev/feedbase> for more details.
+The `expiration` option specifies the number of seconds until each
+value expires, while `interval` specifies how often they are updated.
