@@ -36,7 +36,8 @@ Feedbase
 --------
 
 Feedbase is a simple smart contract that lets anyone publish price
-feeds to the Ethereum blockchain.
+feeds to the Ethereum blockchain.  For information about how to claim
+your feed IDs, please see <https://github.com/nexusdev/feedbase>.
 
 This daemon works as a simple loop which periodically updates a set of
 feeds specified in `~/.keeper.json`, as in the following example:
@@ -64,8 +65,6 @@ By default, the Ethereum node at `http://localhost:8545` is used.
 To change this, please set the variable `ETH_RPC_URL`.  Currently,
 only one Ethereum account (specified by the `ETH_ACCOUNT` variable)
 can be used.  This account must be the owner of all the price feeds.
-Of course, you need to your feed IDs before you can publish to them.
-See <https://github.com/nexusdev/feedbase> for more details.
 
 Each value will be automatically converted into fixed-point notation
 according to the value of the `type` option for the feed in question.
