@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -eu
+fail() { echo >&2 "${0##*/}: error: $*"; exit 1; }
+
+for pair; do
+  [[ $pair = */* ]] || fail "bad pair: $pair"
+  pair=${pair^^} base=${pair%/*} quote=${pair#*/}
+
+  trap 'fail "$url"' ERR
+  url="https://api.bitcoinaverage.com/ticker/$base"
+  json=$(curl -fsSL "$url")
+
+  trap 'fail "$json"' ERR
+  price=$(jshon <<<"$json" -Q -e last -u)
+  volume=$(jshon <<<"$json" -Q -e total_vol -u)
+  echo $pair $price $volume
+done

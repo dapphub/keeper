@@ -1,2 +1,4 @@
-#!/bin/sh
-exec "$0-$@"
+#!/usr/bin/env bash
+set -- "${1,,}"
+set -- "${1//\/}"
+exec "$0-$1"

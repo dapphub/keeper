@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e -o pipefail
+keeper fetch-price-yahoo USD/XDR | awk '{print $2}'

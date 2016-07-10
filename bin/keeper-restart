@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+if [[ $# = 0 ]]; then
+  keeper restart $(keeper services)
+else
+  for service; do
+    keeper stop "$service"
+    keeper start "$service"
+  done
+fi

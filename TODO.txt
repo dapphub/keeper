@@ -1,0 +1,12 @@
+- geth
+- parity
+- detect when feed is read and update early
+- automatically use owner account for each feed
+- maker market liquidity bot
+- alarm clock
+- ipfs default pins
+- bitshares witness
+- bitshares pricefeed
+- elastic-ethereum
+- tor
+- ripple liquidity bot

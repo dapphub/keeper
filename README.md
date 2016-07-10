@@ -9,24 +9,26 @@ Examples of incentivised behavior include mining, staking, witnessing,
 or otherwise producing blocks, publishing price feeds, or poking smart
 contract systems such as Maker or the Ethereum Alarm Clock.
 
-Since most keepers want to run as many profitable daemons as possible,
-writing a Keeper daemon is a good way to ensure that any theoretically
+Since keepers want to run as many profitable daemons as possible,
+writing a Keeper plugin is a good way to ensure that any theoretically
 incentivized actions presented by your system actually get executed.
 
 
 Getting started
 ---------------
 
-To start Keeper with the default set of daemons:
+To start the default set of Keeper daemons:
 
     git clone https://github.com/nexusdev/keeper
     cd keeper
-    docker-compose up
+    bin/keeper start
 
-If you have all the dependencies installed (see `Dockerfile`), you can
-also just run Keeper directly:
+Keeper uses Docker to run and manage its daemons, so you need to
+install Docker before you can use `keeper start`, `keeper stop`, etc.
 
-    bin/keeper poloniex
+However, if you have the dependencies installed (see `Dockerfile`),
+you can also just run the Keeper daemons manually on your machine:
+
     bin/keeper feedbase-daemon
 
 The same configuration file (`~/.keeper.json`) is used in both cases.
@@ -46,13 +48,13 @@ feeds specified in `~/.keeper.json`, as in the following example:
       "feedbase": {
         "feeds": {
           "37": {
-            "command": "keeper price poloniex BTC_DOGE",
+            "command": "keeper price USD/XBT",
             "type": "ufixed128x128",
             "expiration": 120,
             "interval": 60
           },
           "38": {
-            "command": "keeper price poloniex XMR_LTC",
+            "command": "keeper price XBT/ETH",
             "type": "ufixed192x64",
             "expiration": 300,
             "interval": 120

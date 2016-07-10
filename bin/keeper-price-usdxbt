@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e -o pipefail
+keeper fetch-price-btcavg USD/BTC | awk '{print $2}'

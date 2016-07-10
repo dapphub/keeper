@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-set -eu
-fail() { echo >&2 ${0##*/}: $*; exit 1; }
+set -eux
+fail() { echo >&2 "${0##*/}: error: $*"; exit 1; }
 
 case $1 in
 ufixed*x*)
-  keeper typecast-ufixed ${1//[a-z]/ } $2;;
+  keeper typecast-ufixed ${1//[a-z]/ } "$2";;
 *)
-  fail error: unknown type: $1;;
+  fail "unknown type: $1";;
 esac

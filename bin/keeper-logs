@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [[ $# = 0 ]]; then
+  keeper logs $(keeper daemons)
+else
+  for service; do
+    docker logs keeper-$service | sed "s/^/$service: /"
+  done
+fi

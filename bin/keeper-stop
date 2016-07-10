@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+if [[ $# = 0 ]]; then
+  keeper stop $(keeper daemons)
+else
+  for service; do
+    (set -x; docker stop "keeper-$service")
+  done
+fi

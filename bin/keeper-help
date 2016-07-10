@@ -1,0 +1,16 @@
+#!/bin/sh
+cat <<.
+Usage: ${0##*/} <command> [<args>]
+
+Commands:
+
+   daemons       list all available Keeper daemons
+   ps            list currently running Keeper daemons
+   start         start the specified daemons (default: all)
+   stop          stop the specified daemons (default: all)
+   restart       restart the specified daemons (default: all)
+   logs          view logs for the specified daemons (default: all)
+   price         fetch price quote for the specified pair
+
+Report bugs to <https://github.com/nexusdev/keeper>.
+.

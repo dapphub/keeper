@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eu -o pipefail -- ${*^^}
+fail() { echo >&2 "${0##*/}: error: $*"; exit 1; }
+
+for pair; do
+  [[ $pair = */* ]] || fail "bad pair: $pair"
+  base=${pair%/*} quote=${pair#*/}
+  assets+=$quote$base=X,
+done
+
+trap 'fail "$url"' ERR
+url="http://download.finance.yahoo.com/d/quotes.csv?s=$assets&f=l1&e=.csv"
+csv=$(curl -fsSL "$url" | tr -d '\r')
+
+for pair; do
+  read price
+  echo $pair $price
+done <<<"$csv"

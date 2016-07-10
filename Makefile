@@ -1,2 +1,1 @@
-build:; docker-compose build
-run:; docker-compose up
+all:; docker build -t nexusdev/keeper .
