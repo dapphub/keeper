@@ -12,4 +12,4 @@ feed_value=$(set -x; keeper typecast "$type" "$raw_value")
 feed_expiration=$(($(date +%s) + $(get expiration)))
 
 echo >&2 "Setting expiration to $(get expiration) seconds from now."
-(set -x; feedbase publish "$feed_id" "$feed_value" "$feed_expiration")
+(set -x; feedbase set "$feed_id" "$feed_value" "$feed_expiration")
