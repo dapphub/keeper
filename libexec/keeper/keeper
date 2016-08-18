@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+export KEEPER_JSON=${KEEPER_JSON-`cat ~/.keeper.json || echo {}`}
+exec "$0-${1-help}" "${@:2}"

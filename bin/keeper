@@ -1,4 +1,2 @@
-#!/usr/bin/env bash
-type -t keeper >/dev/null || PATH+=:${0%/*}
-[[ $KEEPER_JSON ]] || export KEEPER_JSON=$(cat ~/.keeper.json)
-exec "$0-${1-help}" "${@:2}"
+#!/bin/sh -e
+PATH=${0%bin/keeper}libexec/keeper:$PATH keeper "$@"

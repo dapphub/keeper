@@ -1,6 +1,6 @@
 #!/bin/sh
 cat <<.
-Usage: ${0##*/} <command> [<args>]
+Usage: keeper <command> [<args>]
 
 Commands:
 
@@ -12,5 +12,5 @@ Commands:
    logs          view logs for the specified daemons (default: all)
    price         fetch price quote for the specified pair
 
-Report bugs to <https://github.com/nexusdev/keeper>.
+Report bugs at <https://github.com/nexusdev/keeper/issues/new>.
 .
