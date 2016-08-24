@@ -1,2 +1,2 @@
 #!/bin/sh -e
-PATH=${0%bin/keeper}libexec/keeper:$PATH keeper "$@"
+PATH=${0%/*/*}/libexec/keeper:$PATH keeper "$@"

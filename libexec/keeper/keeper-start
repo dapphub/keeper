@@ -1,9 +1,3 @@
-#!/usr/bin/env bash
-set -ex
-if [[ $# = 0 ]]; then
-  keeper start $(keeper services)
-else
-  for service; do
-    keeper "$service"-start
-  done
-fi
+#!/bin/sh -e
+[ $# != 0 ] || exec keeper start `keeper ls`
+for x; do (set -x; keeper "$x"-start); done

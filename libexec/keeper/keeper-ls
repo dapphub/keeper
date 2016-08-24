@@ -1,0 +1,5 @@
+#!/bin/sh
+echo feedbased
+echo parity-etclive
+echo parity-ethlive
+echo parity-morden

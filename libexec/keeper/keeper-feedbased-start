@@ -1,5 +1,5 @@
 #!/bin/sh -eux
-docker run --rm --name=keeper-feedbase --net=host \
+docker run --rm --name=keeper-feedbased --net=host \
 -e ETH_ACCOUNT -e ETH_RPC_URL -e HOME \
 -v $HOME/.keeper.json:$HOME/.keeper.json:ro \
-nexusdev/keeper keeper feedbase-daemon
+nexusdev/keeper keeper feedbased

@@ -4,12 +4,12 @@ Usage: keeper <command> [<args>]
 
 Commands:
 
-   daemons       list all available Keeper daemons
-   ps            list currently running Keeper daemons
-   start         start the specified daemons (default: all)
-   stop          stop the specified daemons (default: all)
-   restart       restart the specified daemons (default: all)
-   logs          view logs for the specified daemons (default: all)
+   ls            list all available Keeper services
+   ps            list currently running Keeper services
+   start         start the specified services (default: all)
+   stop          stop the specified services (default: all)
+   restart       restart the specified services (default: all)
+   logs          view logs for the specified services (default: all)
    price         fetch price quote for the specified pair
 
 Report bugs at <https://github.com/nexusdev/keeper/issues/new>.
