@@ -1,7 +1,9 @@
+prefix ?= /usr/local
+
 all:; docker build -t nexusdev/keeper .
 
 dirs = {bin,libexec}
-prefix ?= /usr/local
+SHELL = bash
 
 dirs:; mkdir -p $(prefix)/$(dirs)
 files = $(shell ls -d $(dirs)/*)
