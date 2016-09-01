@@ -1,0 +1,4 @@
+#!/bin/sh -e
+btc=$(keeper price usdxbt)
+eth=$(keeper price xbteth)
+echo "scale=2; $btc * $eth" | bc
